@@ -4,6 +4,8 @@
 # Cookie Monster can eat either 0, 1, 2, or 3 cookies at a time
 # If he were given n cookies, how many ways could he eat all cookies in the jar?
 
+import sys
+
 def eating_cookies(n):
   # base cases according to rules
   if n < 0:
