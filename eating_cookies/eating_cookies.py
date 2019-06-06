@@ -7,17 +7,24 @@
 import sys
 
 def eating_cookies(n):
-  # base cases according to rules
-  if n < 0:
-    return 0
-  elif n == 0 or n == 1:
-    return 1
-  elif n == 2:
-    return 2
-  elif n == 3:
-    return 4
-  # move towards base cases via 3 possible cookie denominations
-  return eating_cookies(n-1) + eating_cookies(n-2) + eating_cookies(n-3)
+  # set cache with 0s
+  c = [0 for _ in range(n+1)]
+  # nest recursive fn to receive updating cache
+  def eating_perms(n, c):
+    # base cases according to rules
+    if n < 0:
+      return 0
+    elif n <= 1:
+      return 1
+    # grab value from cache if it exists
+    elif c[n] > 0:
+      return c[n]
+    else:
+      # set value in cache
+      c[n] = eating_perms(n-1, c) + eating_perms(n-2, c) + eating_perms(n-3, c)
+      return c[n]
+  # return result from invocation of nested fn
+  return eating_perms(n, c)
 
 if __name__ == "__main__":
   if len(sys.argv) > 1:
